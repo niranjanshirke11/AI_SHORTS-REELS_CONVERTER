@@ -2,7 +2,6 @@
 🎬 Automated system that converts long study streams into high-quality, silence-free 30–40s vertical Shorts using Python + FFmpeg with one-click execution.
 
 # 🎬 Smart Stream Shorts Automation System
-
 [![Python](https://img.shields.io/badge/Python-3.x-blue.svg)]()
 [![FFmpeg](https://img.shields.io/badge/FFmpeg-Enabled-black.svg)]()
 [![Automation](https://img.shields.io/badge/Workflow-Fully%20Automated-green.svg)]()
@@ -150,4 +149,8 @@ Engineered for scale.
 
 ## 📜 License
 
+<<<<<<< HEAD
 MIT License
+=======
+MIT License
+>>>>>>> fd56922 (🚀 Initial commit: Automated Study Stream Shorts System)

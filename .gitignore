@@ -1,0 +1,26 @@
+# Binaries & Large Files
+ffmpeg/
+*.exe
+
+# Media Folders (Ignore raw and processed video)
+input/
+Vlogs_clips/
+Vertical_9_16_Vlogs_clips/
+output/
+*.mp4
+
+# Operational / Temporary files
+_vlogs_list.txt
+VLOGS_9x16_LOG.txt
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.venv/
+env/
+build/
+dist/
+*.spec
