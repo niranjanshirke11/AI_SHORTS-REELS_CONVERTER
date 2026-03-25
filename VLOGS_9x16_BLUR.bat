@@ -49,21 +49,26 @@ echo Starting conversion...
 echo Starting conversion... >> "%LOG%"
 
 for /f "usebackq delims=" %%F in ("%LIST%") do (
-  echo Converting: %%F
-  echo FILE: %%F>>"%LOG%"
-
-  "%FF%" -loglevel error -y -i "%SRC%\%%F" ^
-    -filter_complex "[0:v]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,boxblur=20:1[bg];[0:v]scale=1080:-1:force_original_aspect_ratio=decrease[fg];[bg][fg]overlay=(W-w)/2:(H-h)/2,format=yuv420p[v]" ^
-    -map "[v]" -map 0:a? ^
-    -c:v libx264 -preset slow -crf 18 ^
-    -c:a aac -b:a 192k ^
-    "%DEST%\%%~nF_9x16_blur.mp4" >> "%LOG%" 2>&1
-
-  if errorlevel 1 (
-    echo ERROR converting: %%F
-    echo ERROR converting: %%F>>"%LOG%"
+  if exist "%DEST%\%%~nF_9x16_blur.mp4" (
+    echo Skipping: %%F ^(Already exists^)
+    echo SKIPPED: %%F>>"%LOG%"
   ) else (
-    echo OK: %%F>>"%LOG%"
+    echo Converting: %%F
+    echo FILE: %%F>>"%LOG%"
+
+    "%FF%" -loglevel error -y -i "%SRC%\%%F" ^
+      -filter_complex "[0:v]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,boxblur=20:1[bg];[0:v]scale=1080:-1:force_original_aspect_ratio=decrease[fg];[bg][fg]overlay=(W-w)/2:(H-h)/2,format=yuv420p[v]" ^
+      -map "[v]" -map 0:a? ^
+      -c:v libx264 -preset slow -crf 18 ^
+      -c:a aac -b:a 192k ^
+      "%DEST%\%%~nF_9x16_blur.mp4" >> "%LOG%" 2>&1
+
+    if errorlevel 1 (
+      echo ERROR converting: %%F
+      echo ERROR converting: %%F>>"%LOG%"
+    ) else (
+      echo OK: %%F>>"%LOG%"
+    )
   )
 )
 

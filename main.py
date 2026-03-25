@@ -208,6 +208,10 @@ def main():
 
     for i, clip in enumerate(final_clips):
         output_file = os.path.join(OUTPUT_FOLDER, f"Short_{i+1}_{video_name.split('.')[0]}.mp4")
+        if os.path.exists(output_file):
+            print(f"\n[{i+1}/{user_count}] Skipping: {os.path.basename(output_file)} (Already exists)")
+            continue
+
         print(f"\n[{i+1}/{user_count}] Generating: {os.path.basename(output_file)}")
         print(f"   Time: {clip['start']}s to {round(clip['start']+clip['duration'],2)}s")
 
